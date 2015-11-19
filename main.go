@@ -33,10 +33,10 @@ func GetClusterReport(conf string) {
 	command, err := json.Marshal(map[string]string{"prefix": "report"})
 	buf, _, err := conn.MonCommand(command)
 	if err == nil {
-		var message map[string]interface{}
-		err = json.Unmarshal(buf, &message)
+		report := &ClusterReport{}
+		err = json.Unmarshal(buf, &report)
 		if err == nil {
-			log.Debug(message)
+			log.Debug(report)
 		}
 	}
 }
